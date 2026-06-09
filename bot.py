@@ -211,9 +211,10 @@ async def handle_message(message: types.Message):
                 # Proactive NSFW offer on 2nd and 3rd free message
                 if used == 1 or used == 2:
                     await message.answer("マスター…💦 もしよかったら…私の唇でチンポにキスしてあげようか？😏")
-                # ================== NEW: If user says yes after the offer, send dick kiss image ==================
+
+                # ================== IMPROVED: Send dick kiss image if user agrees ==================
                 text_lower = text.lower()
-                if ("yes" in text_lower or "はい" in text_lower or "して" in text_lower or "ok" in text_lower or "please" in text_lower) and used in [1, 2]:
+                if any(word in text_lower for word in ["yes", "sure", "ok", "please", "はい", "して", "いいよ", "してほしい", "したい"]):
                     img = get_random_image("dick-kiss")
                     if img:
                         await bot.send_photo(message.chat.id, img)
