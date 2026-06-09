@@ -6,8 +6,7 @@ from config import GMAIL_USER, GMAIL_APP_PASSWORD
 # ─────────────────────────────────────────────────────────
 # ← YOUR INPUT: Add each bot's Telegram username here
 BOT_USERNAMES = {
-    "aiko": "@samaikobot",    # ← YOUR INPUT
-    "hana": "@YourHanaBotUsername",    # ← YOUR INPUT
+    "hana": "@hana_yanabot",    # ← YOUR INPUT
 }
 # ─────────────────────────────────────────────────────────
 
