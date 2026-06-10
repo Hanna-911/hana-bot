@@ -157,7 +157,8 @@ def get_active_subscriber_ids(bot_name):
     rows = c.fetchall()
     conn.close()
     return [row[0] for row in rows]
-    def get_free_messages_used(user_id):
+
+def get_free_messages_used(user_id):
     conn = get_conn()
     c = conn.cursor()
     c.execute("SELECT messages_used FROM free_trials WHERE user_id = %s", (user_id,))
