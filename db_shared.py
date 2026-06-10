@@ -41,6 +41,15 @@ def init_subscription_db():
             created_at TIMESTAMP DEFAULT NOW()
         )
     """)
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS free_trials (
+            user_id BIGINT PRIMARY KEY,
+            messages_used INTEGER DEFAULT 0
+        )
+    """)
+    conn.commit()
+    conn.close()
+    print("[DB] Subscription tables ready.")
 
     conn.commit()
     conn.close()
@@ -148,3 +157,22 @@ def get_active_subscriber_ids(bot_name):
     rows = c.fetchall()
     conn.close()
     return [row[0] for row in rows]
+    def get_free_messages_used(user_id):
+    conn = get_conn()
+    c = conn.cursor()
+    c.execute("SELECT messages_used FROM free_trials WHERE user_id = %s", (user_id,))
+    row = c.fetchone()
+    conn.close()
+    return row[0] if row else 0
+
+
+def increment_free_messages(user_id):
+    conn = get_conn()
+    c = conn.cursor()
+    c.execute("""
+        INSERT INTO free_trials (user_id, messages_used)
+        VALUES (%s, 1)
+        ON CONFLICT (user_id) DO UPDATE SET messages_used = free_trials.messages_used + 1
+    """, (user_id,))
+    conn.commit()
+    conn.close()
