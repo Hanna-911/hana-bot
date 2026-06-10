@@ -13,7 +13,8 @@ from aiogram.filters import Command
 from aiogram.enums import ParseMode
 from aiogram.client.default import DefaultBotProperties
 from config import BOT_TOKEN, PATREON_URL
-from db import init_db, save_message, get_free_messages_used, increment_free_messages
+from db import init_db, save_message
+from db_shared import get_free_messages_used, increment_free_messages
 from db_shared import (
     init_subscription_db,
     use_activation_code,
